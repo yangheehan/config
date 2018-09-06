@@ -1,0 +1,88 @@
+server:
+  port: ${PORT:7777}
+   
+spring:
+  profiles: default
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://211.174.212.125:3306/saas_auth
+    username: auth
+    password: auth
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    max-active: 5
+    initialize: false
+    
+    
+resource:
+  id: sys-auth    
+  
+swagger:
+  basePackage: com.bizisolution.auth.user
+---
+
+server:
+  port: ${PORT:7777}
+   
+spring:
+  profiles: aws
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://211.174.212.125:3306/saas_auth
+    username: auth
+    password: auth
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    initialize: false
+    max-active: 5
+    
+resource:
+  id: sys-auth    
+  
+swagger:
+  basePackage: com.bizisolution.auth.user
+---
+
+
+
+server:
+  port: ${PORT:7777}
+   
+spring:
+  profiles: test
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://bizinas.synology.me:3307/saas_test
+    username: saas_test
+    password: saas_test
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    initialize: false
+    
+resource:
+  id: sys-auth    
+  
+swagger:
+  basePackage: com.bizisolution.auth.user
+---  
+server:
+  port: ${PORT:7777}
+   
+spring:
+  profiles: local
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://bizinas.synology.me:3307/saas_test
+    username: saas_test
+    password: saas_test
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    initialize: false
+    
+resource:
+  id: sys-auth    
+  
+swagger:
+  basePackage: com.bizisolution.auth.user
+
+  

@@ -1,0 +1,86 @@
+logging:
+  level:
+    org.springframework.security: DEBUG
+      
+      
+security:
+  sessions: stateless
+  user:
+    password: none
+  oauth2:
+    resource:
+      jwt:
+        keyValue: |
+              -----BEGIN PUBLIC KEY-----
+              MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgh2/r2giOQ/h0nIDQTO+TEasrjcDT7uvHqhaxAu4Sqxsl/UyvBc1lnyyoC6r8xWQkwNCPoXbfD8zpffc2xFFLVW/VItZhYhNks4cVXXJXtgmahRScwICaFidQtpmKIyBbrIwEufqgWGJfjV3oTKBBFyfNPCXU2j8jb+Kwgi5Hgjw6ISqoc7Guoy0mZwqx9Fs98Q8/DmJglXdIGfgUPu0io6+7esKc4jNudvioHB8fEUtIM3Oiix1VHyLwfp9KGjBhR601UR1kILnsjpnppKpYiNDRsr+qCVRdm4Z3iDBXEJ+rXEdSTkpPmbMDJed81ePdpJhwwtg0TihB84IBaoP7QIDAQAB
+              -----END PUBLIC KEY-----
+              
+swagger:
+  auth:
+    link: http://ec2-13-124-107-226.ap-northeast-2.compute.amazonaws.com:7777             
+
+---
+   
+spring:
+  profiles: aws
+  
+eureka:
+  instance :
+    prefer-ip-address : true
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://ec2-13-124-107-226.ap-northeast-2.compute.amazonaws.com:8761/eureka}  
+      
+security:
+  sessions: stateless
+  user:
+    password: none
+  oauth2:
+    resource:
+      jwt:
+        keyValue: |
+              -----BEGIN PUBLIC KEY-----
+              MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgh2/r2giOQ/h0nIDQTO+TEasrjcDT7uvHqhaxAu4Sqxsl/UyvBc1lnyyoC6r8xWQkwNCPoXbfD8zpffc2xFFLVW/VItZhYhNks4cVXXJXtgmahRScwICaFidQtpmKIyBbrIwEufqgWGJfjV3oTKBBFyfNPCXU2j8jb+Kwgi5Hgjw6ISqoc7Guoy0mZwqx9Fs98Q8/DmJglXdIGfgUPu0io6+7esKc4jNudvioHB8fEUtIM3Oiix1VHyLwfp9KGjBhR601UR1kILnsjpnppKpYiNDRsr+qCVRdm4Z3iDBXEJ+rXEdSTkpPmbMDJed81ePdpJhwwtg0TihB84IBaoP7QIDAQAB
+              -----END PUBLIC KEY-----
+              
+swagger:
+  auth:
+    link: http://ec2-13-124-107-226.ap-northeast-2.compute.amazonaws.com:7777                            
+---
+
+spring:
+  profiles: local
+  
+test_oauth:
+    url: http://localhost:7777/oauth/token
+    client_id: saas
+    client_passwd: saas
+    user_id: yanghee
+    user_passwd: yanghee
+    tenant_id: saas
+  
+eureka:
+  instance :
+    prefer-ip-address : false
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+---   
+spring:
+  profiles: test
+  
+test_oauth:
+    url: http://localhost:7777/oauth/token
+    client_id: saas
+    client_passwd: saas
+    user_id: yanghee
+    user_passwd: yanghee
+    tenant_id: saas
+  
+eureka:
+  instance :
+    prefer-ip-address : false
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://ec2-13-124-107-226.ap-northeast-2.compute.amazonaws.com:8761/eureka}  
+    
